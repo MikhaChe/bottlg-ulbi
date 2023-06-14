@@ -40,9 +40,9 @@ const startBot = () => {
 
     const connection = mysql.createConnection({
       host: "localhost",
-      user: "root",
+      user: "mikhache_res",
       database: "mikhache_res",
-      password: "7871"
+      password: "At*NJ7z9"
     });
     connection.connect(function(err){
       if (err) {
