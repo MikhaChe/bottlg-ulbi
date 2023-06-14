@@ -29,7 +29,7 @@ const startBot = () => {
     {command: '/start', description: 'Run'},
     {command: '/info', description: 'Get info'},
     {command: '/connect', description: 'Connect to DB'},
-    {command: '/getbyid', description: 'Get by ID'},
+    //{command: '/getbyID', description: 'Get by ID'},
     {command: '/disconnect', description: 'Close the DB connection'},
     {command: '/registration', description: 'Registration'}
   ])
@@ -37,13 +37,6 @@ const startBot = () => {
   bot.on('message', async msg => {
     const textMsg = msg.text;
     const chatUserID = msg.chat.id;
-
-    const connection = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      database: "mikhache_res",
-      password: "7871"
-    });
     
     if(textMsg === '/start') {
       await bot.sendMessage(chatID, "I was turned on by the user: " + msg.from.first_name + msg.from.last_name);
@@ -57,46 +50,11 @@ const startBot = () => {
       return bot.sendMessage(chatUserID, "So far, I don't know why I was created");
     }
 
-    if(textMsg === '/connect') {
-
-      connection.connect(function(err){
-        if (err) {
-          return bot.sendMessage(chatUserID, "MySQL. Connecting error: " + err.message); 
-        }
-        return bot.sendMessage(chatUserID, "MySQL: connection successful");
-      });
-    }
-
-    if(textMsg === '/getbyid') {
-      const query = 'SELECT * FROM users WHERE id = 2';
-
-      connection.query(query, (err, results, fields) => {
-        if (err) {
-          return bot.sendMessage(chatUserID,'Error request: ' + err.stack);
-        }
-        const user = JSON.parse(JSON.stringify(results));
-        bot.sendMessage(chatUserID, user[0].obr + " " + user[0].name +",");
-        bot.sendMessage(chatUserID, "Ваш email:" + user[0].email);
-        bot.sendMessage(chatUserID, "телефон:" + user[0].tel);
-        bot.sendMessage(chatUserID, "логин:" + user[0].login);
-        bot.sendMessage(chatUserID, "пароль:" + user[0].passwd);
-      });   
-    }
-
-    if(textMsg === '/disconnect') {
-      connection.end(function(err) {
-        if (err) {
-          return bot.sendMessage(chatUserID, "MySQL. Error: " + err.message);
-        }
-        return bot.sendMessage(chatUserID, "Connection closed");
-      });
-    }
-
     if(textMsg === '/registration') {
       return bot.sendMessage(chatUserID, "Subscribe", buttonsTablet); 
     }
   
-    //return bot.sendMessage(chatUserID, 'I don\'t understand you, let\'s try again...')
+    return bot.sendMessage(chatUserID, 'I don\'t understand you, let\'s try again...')
   })
 
   bot.on('callback_query', msg => {
