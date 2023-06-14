@@ -44,6 +44,12 @@ const startBot = () => {
       database: "mikhache_res",
       password: "7871"
     });
+    connection.connect(function(err){
+      if (err) {
+        return bot.sendMessage(chatUserID, "MySQL. Connecting error: " + err.message); 
+      }
+      return bot.sendMessage(chatUserID, "MySQL: connection successful");
+    });
     
     if(textMsg === '/start') {
       await bot.sendMessage(chatID, "I was turned on by the user: " + msg.from.first_name + msg.from.last_name);
@@ -56,16 +62,6 @@ const startBot = () => {
       await bot.sendSticker(chatUserID, 'https://tlgrm.ru/_/stickers/7bd/93c/7bd93cd5-8b8e-3cf7-ab8e-a3a15ebe0e33/4.webp');
       return bot.sendMessage(chatUserID, "So far, I don't know why I was created");
     }
-
-    // if(textMsg === '/connect') {
-
-    //   connection.connect(function(err){
-    //     if (err) {
-    //       return bot.sendMessage(chatUserID, "MySQL. Connecting error: " + err.message); 
-    //     }
-    //     return bot.sendMessage(chatUserID, "MySQL: connection successful");
-    //   });
-    // }
 
     if(textMsg === '/getbyid') {
       const query = 'SELECT * FROM users WHERE id = 2';
