@@ -28,9 +28,9 @@ const startBot = () => {
   bot.setMyCommands([
     {command: '/start', description: 'Run'},
     {command: '/info', description: 'Get info'},
-    {command: '/connect', description: 'Connect to DB'},
+    // {command: '/connect', description: 'Connect to DB'},
     {command: '/getbyid', description: 'Get by ID'},
-    {command: '/disconnect', description: 'Close the DB connection'},
+    // {command: '/disconnect', description: 'Close the DB connection'},
     {command: '/registration', description: 'Registration'}
   ])
   
@@ -57,15 +57,15 @@ const startBot = () => {
       return bot.sendMessage(chatUserID, "So far, I don't know why I was created");
     }
 
-    if(textMsg === '/connect') {
+    // if(textMsg === '/connect') {
 
-      connection.connect(function(err){
-        if (err) {
-          return bot.sendMessage(chatUserID, "MySQL. Connecting error: " + err.message); 
-        }
-        return bot.sendMessage(chatUserID, "MySQL: connection successful");
-      });
-    }
+    //   connection.connect(function(err){
+    //     if (err) {
+    //       return bot.sendMessage(chatUserID, "MySQL. Connecting error: " + err.message); 
+    //     }
+    //     return bot.sendMessage(chatUserID, "MySQL: connection successful");
+    //   });
+    // }
 
     if(textMsg === '/getbyid') {
       const query = 'SELECT * FROM users WHERE id = 2';
@@ -83,14 +83,14 @@ const startBot = () => {
       });   
     }
 
-    if(textMsg === '/disconnect') {
-      connection.end(function(err) {
-        if (err) {
-          return bot.sendMessage(chatUserID, "MySQL. Error: " + err.message);
-        }
-        return bot.sendMessage(chatUserID, "Connection closed");
-      });
-    }
+    // if(textMsg === '/disconnect') {
+    //   connection.end(function(err) {
+    //     if (err) {
+    //       return bot.sendMessage(chatUserID, "MySQL. Error: " + err.message);
+    //     }
+    //     return bot.sendMessage(chatUserID, "Connection closed");
+    //   });
+    // }
 
     if(textMsg === '/registration') {
       return bot.sendMessage(chatUserID, "Subscribe", buttonsTablet); 
