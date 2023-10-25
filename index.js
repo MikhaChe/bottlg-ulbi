@@ -1,8 +1,9 @@
+require('dotenv').config();
 const tlgKey = require('node-telegram-bot-api');
 const mysql = require('mysql');
 
-const botToken = '6105575827:AAG6657shRVQ_0JLeEQTups4G_ftD3wPvsw';
-const chatID = '-1001954148855'
+const botToken = process.env.API_TOKEN;
+const chatID = process.env.CHAT_ID;
 
 const bot = new tlgKey(botToken, {polling: true});
 
@@ -33,6 +34,8 @@ const startBot = () => {
     // {command: '/disconnect', description: 'Close the DB connection'},
     {command: '/registration', description: 'Registration'}
   ])
+
+  console.log(process.env.API_TOKEN);
   
   bot.on('message', async msg => {
     const textMsg = msg.text;
@@ -40,9 +43,9 @@ const startBot = () => {
 
     const connection = mysql.createConnection({
       host: "localhost",
-      user: "mikhache_res",
-      database: "mikhache_res",
-      password: "At*NJ7z9"
+      user: "******_res",
+      database: "******_res",
+      password: "******"
     });
     connection.connect(function(err){
       if (err) {
