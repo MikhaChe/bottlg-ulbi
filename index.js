@@ -4,6 +4,10 @@ const mysql = require('mysql');
 
 const botToken = process.env.API_TOKEN;
 const chatID = process.env.CHAT_ID;
+const userName = process.env.USER_CONNECTION;
+const nameDB = process.env.DATABASE_NAME;
+const pswDB = process.env.DB_PSSW;
+
 
 const bot = new tlgKey(botToken, {polling: true});
 
@@ -43,9 +47,9 @@ const startBot = () => {
 
     const connection = mysql.createConnection({
       host: "localhost",
-      user: "******_res",
-      database: "******_res",
-      password: "******"
+      user: userName,
+      database: nameDB,
+      password: pswDB
     });
     connection.connect(function(err){
       if (err) {
